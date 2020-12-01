@@ -2,11 +2,13 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    count: 0
+    count: 0,
+    massage: ""
   },
   getters: {
     doubleCount: state => state.count * 2,
-    tripleCount: state => state.count * 3
+    tripleCount: state => state.count * 3,
+    message: state => state.message
   },
   mutations: { // commit
     increment(state, number) {
@@ -14,6 +16,9 @@ export default createStore({
     },
     decrement(state, number) {
       state.count -= number;
+    },
+    updateMessage(state, newMessage) {
+      state.message = newMessage
     }
   },
   actions: { // dispatch
@@ -22,6 +27,9 @@ export default createStore({
     },
     decrement(context, number) {
       context.commit("decrement", number);
+    },
+    updateMessage(context, newMessage) {
+      context.commit("updateMessage", newMessage)
     }
   },
   modules: {

@@ -4,8 +4,13 @@
     <div>×2 {{ doubleCount }}</div>
     <div>×3 {{ tripleCount }}</div>
     <div>
-      <button @click="increment">+1</button>
-      <button @click="decrement">-1</button>
+      <button @click="increment(1)">+1</button>
+      <button @click="decrement(1)">-1</button>
+    </div>
+    <div>
+      <input type="text" v-model="message">
+      <p>{{ message }}</p>
+      
     </div>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -14,7 +19,7 @@
 </template>
 
 <script>
-import { mapGetters, /* mapMutations */ } from "vuex";
+import { mapGetters, /* mapMutations */ mapActions } from "vuex";
 
 export default {
   computed: {
@@ -22,18 +27,30 @@ export default {
       "doubleCount",
       "tripleCount"
     ]),
-    count(){
+    count() {
       return this.$store.state.count;
+    },
+    // message() {
+    //   return this.$store.getters.message;
+    // }
+    message: {
+      get() {
+        return this.$store.getters.message;
+      },
+      set(value) {
+        this.$store.dispatch("updateMessage", value)
+      }
     }
   },
   methods: {
     // ...mapMutations(["increment", "decrement"])
-    increment() {
-      this.$store.dispatch("increment", 1);
-    },
-    decrement() {
-      this.$store.dispatch("decrement", 1);
-    }
+    ...mapActions(["increment", "decrement"])
+    // increment() {
+    //   this.$store.dispatch("increment", 1);
+    // },
+    // decrement() {
+    //   this.$store.dispatch("decrement", 1);
+    // }
   }
 }
 </script>
