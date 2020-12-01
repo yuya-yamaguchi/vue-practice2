@@ -23,12 +23,15 @@ import { mapGetters, /* mapMutations */ mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters([
-      "doubleCount",
-      "tripleCount"
-    ]),
+    ...mapGetters(
+      "count",
+      [
+        "doubleCount",
+        "tripleCount"
+      ]
+    ),
     count() {
-      return this.$store.state.count;
+      return this.$store.getters.count;
     },
     // message() {
     //   return this.$store.getters.message;
@@ -44,7 +47,7 @@ export default {
   },
   methods: {
     // ...mapMutations(["increment", "decrement"])
-    ...mapActions(["increment", "decrement"])
+    ...mapActions("count",["increment", "decrement"])
     // increment() {
     //   this.$store.dispatch("increment", 1);
     // },
