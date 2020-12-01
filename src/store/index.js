@@ -9,6 +9,12 @@ export default createStore({
     tripleCount: state => state.count * 3
   },
   mutations: {
+    increment(state, number) {
+      state.count += number;
+    },
+    decrement(state, number) {
+      state.count -= number;
+    }
   },
   actions: {
   },

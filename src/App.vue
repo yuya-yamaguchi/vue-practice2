@@ -28,10 +28,10 @@ export default {
   },
   methods: {
     increment: function(){
-      this.$store.state.count++;
+      this.$store.commit("increment", 1);
     },
     decrement: function(){
-      this.$store.state.count--;
+      this.$store.commit("decrement", 1);
     }
   }
 }
