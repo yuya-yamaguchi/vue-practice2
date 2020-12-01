@@ -14,16 +14,16 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   computed: {
-    count() {
+    ...mapGetters([
+      "doubleCount",
+      "tripleCount"
+    ]),
+    count(){
       return this.$store.state.count;
-    },
-    doubleCount() {
-      return this.$store.getters.doubleCount;
-    },
-    tripleCount() {
-      return this.$store.getters.tripleCount;
     }
   },
   methods: {
