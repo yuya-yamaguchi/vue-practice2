@@ -4,8 +4,8 @@
     <div>×2 {{ doubleCount }}</div>
     <div>×3 {{ tripleCount }}</div>
     <div>
-      <button @click="increment(1)">+1</button>
-      <button @click="decrement(1)">-1</button>
+      <button @click="increment">+1</button>
+      <button @click="decrement">-1</button>
     </div>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters, /* mapMutations */ } from "vuex";
 
 export default {
   computed: {
@@ -27,7 +27,13 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(["increment", "decrement"])
+    // ...mapMutations(["increment", "decrement"])
+    increment() {
+      this.$store.dispatch("increment", 1);
+    },
+    decrement() {
+      this.$store.dispatch("decrement", 1);
+    }
   }
 }
 </script>

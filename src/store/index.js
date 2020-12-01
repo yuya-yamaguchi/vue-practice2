@@ -8,7 +8,7 @@ export default createStore({
     doubleCount: state => state.count * 2,
     tripleCount: state => state.count * 3
   },
-  mutations: {
+  mutations: { // commit
     increment(state, number) {
       state.count += number;
     },
@@ -16,7 +16,13 @@ export default createStore({
       state.count -= number;
     }
   },
-  actions: {
+  actions: { // dispatch
+    increment(context, number) {
+      context.commit("increment", number);
+    },
+    decrement(context, number) {
+      context.commit("decrement", number);
+    }
   },
   modules: {
   }
