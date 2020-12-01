@@ -1,6 +1,12 @@
 <template>
   <div id="nav">
-    <div>{{ count }}</div>
+    <div>×1 {{ count }}</div>
+    <div>×2 {{ doubleCount }}</div>
+    <div>×3 {{ tripleCount }}</div>
+    <div>
+      <button @click="increment">+1</button>
+      <button @click="decrement">-1</button>
+    </div>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div>
@@ -12,6 +18,20 @@ export default {
   computed: {
     count() {
       return this.$store.state.count;
+    },
+    doubleCount() {
+      return this.$store.getters.doubleCount;
+    },
+    tripleCount() {
+      return this.$store.getters.tripleCount;
+    }
+  },
+  methods: {
+    increment: function(){
+      this.$store.state.count++;
+    },
+    decrement: function(){
+      this.$store.state.count--;
     }
   }
 }
