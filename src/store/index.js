@@ -1,25 +1,26 @@
 import { createStore } from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 import count from './modules/count'
+import auth from './modules/auth'
 import getters from './getters'
 import mutations from './mutations'
 import actions from './actions'
 
 export default createStore({
   state: {
-    massage: '',
-    token: ''
+    massage: ''
   },
   getters,
   mutations,
   actions,
   modules: {
-    count
+    count,
+    auth
   },
-  // strict: true,
+  strict: true,
   plugins: [createPersistedState({
     key: 'PracticeApp',
-    paths: ['token'],
-    window:sessionStorage
+    paths: ['auth.token'],
+    storage: window.sessionStorage
   })]
 })

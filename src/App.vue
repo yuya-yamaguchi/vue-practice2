@@ -14,8 +14,8 @@
     <div>
       <p>リロード時もそのまま！</p>
       <input type="text" v-model="value">
-      <button @click="saveVuex">save</button>
-      <p>{{ $store.state.token }}</p>
+      <!-- <button @click="saveVuex">save</button> -->
+      <p>{{ value }}</p>
     </div>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
@@ -27,11 +27,6 @@
 import { mapGetters, /* mapMutations */ mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      value: ""
-    }
-  },
   computed: {
     ...mapGetters(
       "count",
@@ -53,16 +48,21 @@ export default {
       set(value) {
         this.$store.dispatch("updateMessage", value)
       }
+    },
+    value: {
+      get() {
+        return this.$store.getters.token;
+      },
+      set(value) {
+        this.$store.commit("login", value)
+      }
     }
   },
   methods: {
     // ...mapMutations(["increment", "decrement"])
     ...mapActions(
       "count",["increment", "decrement"]
-    ),
-    saveVuex() {
-      this.$store.state.token = this.value;
-    }
+    )
     // increment() {
     //   this.$store.dispatch("increment", 1);
     // },
@@ -72,6 +72,7 @@ export default {
   },
   created: function() {
     console.log("こんちは！");
+    console.log(sessionStorage.getItem('PracticeApp'));
     if (sessionStorage.getItem('PracticeApp')) {
       const strageData = JSON.parse(sessionStorage.getItem('PracticeApp'));
       console.log(strageData.token);
